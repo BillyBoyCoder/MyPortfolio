@@ -18,8 +18,16 @@ export const education = [
     id: 1,
     institution: "TripleTen",
     degree: "Software Engineering Bootcamp",
-    period: "2024 - 2026",
+    period: "2024 - 2025",
     focus: "MERN Stack (MongoDB, Express.js, React, Node.js)",
     status: "Completing"
+  },
+  {
+    id: 2,
+    institution: "Motlow State Community College",
+    degree: "Associate's Degree",
+    period: "Jan 1993 - May 1995",
+    focus: "",
+    status: "Completed"
   }
 ];
