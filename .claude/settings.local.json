@@ -10,7 +10,8 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(npm run build:*)",
-      "Bash(Full Stack Software Engineer\"\n- Added meta description with keywords\n- Added Open Graph tags for social sharing\n- Added Twitter Card tags\n- Created SVG favicon with \"WC\" initials\n- Added theme color meta tags\n- Added canonical URL placeholder\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(Full Stack Software Engineer\"\n- Added meta description with keywords\n- Added Open Graph tags for social sharing\n- Added Twitter Card tags\n- Created SVG favicon with \"WC\" initials\n- Added theme color meta tags\n- Added canonical URL placeholder\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
     ]
   }
 }

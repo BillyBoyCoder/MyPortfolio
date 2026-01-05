@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 import { ThemeContext } from '../../context/ThemeContext';
 import ThemeToggle from './ThemeToggle';
 
@@ -50,18 +50,19 @@ const Navbar = () => {
       <List>
         {navItems.map((item) => (
           <ListItem key={item.to} disablePadding>
-            <ListItemButton
-              component={Link}
+            <ScrollLink
               to={item.to}
               spy={true}
               smooth={true}
               offset={-70}
               duration={500}
               onClick={handleDrawerToggle}
-              sx={{ textAlign: 'center' }}
+              style={{ width: '100%', textDecoration: 'none', color: 'inherit' }}
             >
-              <ListItemText primary={item.label} />
-            </ListItemButton>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <ListItemText primary={item.label} />
+              </ListItemButton>
+            </ScrollLink>
           </ListItem>
         ))}
         <ListItem disablePadding>
@@ -85,48 +86,51 @@ const Navbar = () => {
         position="fixed"
         elevation={trigger ? 4 : 0}
         sx={{
-          bgcolor: trigger
-            ? 'background.paper'
-            : 'transparent',
+          bgcolor: trigger ? 'background.paper' : 'transparent',
           transition: 'all 0.3s ease-in-out',
         }}
       >
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography
-            variant="h6"
-            component={Link}
+          <ScrollLink
             to="hero"
             spy={true}
             smooth={true}
             duration={500}
-            sx={{
-              fontWeight: 700,
-              cursor: 'pointer',
-              color: trigger ? 'text.primary' : (isDarkMode ? 'text.primary' : 'text.primary'),
-            }}
+            style={{ cursor: 'pointer', textDecoration: 'none' }}
           >
-            WC
-          </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                color: 'text.primary',
+              }}
+            >
+              WC
+            </Typography>
+          </ScrollLink>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1 }}>
             {navItems.map((item) => (
-              <Button
+              <ScrollLink
                 key={item.to}
-                component={Link}
                 to={item.to}
                 spy={true}
                 smooth={true}
                 offset={-70}
                 duration={500}
-                sx={{
-                  color: trigger ? 'text.primary' : (isDarkMode ? 'text.primary' : 'text.primary'),
-                  '&:hover': {
-                    color: 'primary.main',
-                  },
-                }}
+                style={{ textDecoration: 'none' }}
               >
-                {item.label}
-              </Button>
+                <Button
+                  sx={{
+                    color: 'text.primary',
+                    '&:hover': {
+                      color: 'primary.main',
+                    },
+                  }}
+                >
+                  {item.label}
+                </Button>
+              </ScrollLink>
             ))}
             <Button
               variant="outlined"
@@ -148,7 +152,7 @@ const Navbar = () => {
               aria-label="open drawer"
               edge="end"
               onClick={handleDrawerToggle}
-              sx={{ color: trigger ? 'text.primary' : (isDarkMode ? 'text.primary' : 'text.primary') }}
+              sx={{ color: 'text.primary' }}
             >
               <MenuIcon />
             </IconButton>

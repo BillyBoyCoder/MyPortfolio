@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Fab, Zoom } from '@mui/material';
+import { Fab, Zoom, Box } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 
 const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
@@ -24,15 +24,7 @@ const ScrollToTop = () => {
 
   return (
     <Zoom in={visible}>
-      <Fab
-        component={Link}
-        to="hero"
-        spy={true}
-        smooth={true}
-        duration={500}
-        color="primary"
-        size="small"
-        aria-label="scroll back to top"
+      <Box
         sx={{
           position: 'fixed',
           bottom: 24,
@@ -40,8 +32,22 @@ const ScrollToTop = () => {
           zIndex: 1000,
         }}
       >
-        <KeyboardArrowUpIcon />
-      </Fab>
+        <ScrollLink
+          to="hero"
+          spy={true}
+          smooth={true}
+          duration={500}
+          style={{ cursor: 'pointer' }}
+        >
+          <Fab
+            color="primary"
+            size="small"
+            aria-label="scroll back to top"
+          >
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollLink>
+      </Box>
     </Zoom>
   );
 };

@@ -3,7 +3,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 import { personalInfo } from '../../data/personalInfo';
 
 const Footer = () => {
@@ -64,23 +64,26 @@ const Footer = () => {
             {currentYear} {personalInfo.name}. All rights reserved.
           </Typography>
 
-          <IconButton
-            component={Link}
+          <ScrollLink
             to="hero"
             spy={true}
             smooth={true}
             duration={500}
-            aria-label="Back to top"
-            sx={{
-              bgcolor: 'primary.main',
-              color: 'white',
-              '&:hover': {
-                bgcolor: 'primary.dark',
-              },
-            }}
+            style={{ cursor: 'pointer' }}
           >
-            <KeyboardArrowUpIcon />
-          </IconButton>
+            <IconButton
+              aria-label="Back to top"
+              sx={{
+                bgcolor: 'primary.main',
+                color: 'white',
+                '&:hover': {
+                  bgcolor: 'primary.dark',
+                },
+              }}
+            >
+              <KeyboardArrowUpIcon />
+            </IconButton>
+          </ScrollLink>
         </Box>
       </Container>
     </Box>
