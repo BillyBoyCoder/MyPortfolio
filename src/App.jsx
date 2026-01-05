@@ -1,32 +1,32 @@
-import { useContext } from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import { ThemeContext } from './context/ThemeContext';
+import { Box } from '@mui/material';
+import Navbar from './components/common/Navbar';
+import Footer from './components/common/Footer';
+import ScrollToTop from './components/common/ScrollToTop';
+import Hero from './components/Hero';
+import About from './components/About';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Experience from './components/Experience';
+import Education from './components/Education';
+import Testimonials from './components/Testimonials';
+import Contact from './components/Contact';
 
 function App() {
-  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
-
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: 'background.default',
-        color: 'text.primary',
-        gap: 2,
-      }}
-    >
-      <Typography variant="h2" component="h1">
-        William Cook
-      </Typography>
-      <Typography variant="h5" color="text.secondary">
-        Full Stack Software Engineer
-      </Typography>
-      <Button variant="contained" onClick={toggleTheme}>
-        {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      </Button>
+    <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Education />
+        <Testimonials />
+        <Contact />
+      </main>
+      <Footer />
+      <ScrollToTop />
     </Box>
   );
 }
