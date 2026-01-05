@@ -164,15 +164,34 @@ const Hero = () => {
               },
             }}
           >
-            <Avatar
-              src={profileImage}
-              alt={personalInfo.name}
+            <Box
               sx={{
+                position: 'relative',
                 width: { xs: 200, sm: 250, md: 300 },
                 height: { xs: 200, sm: 250, md: 300 },
-                boxShadow: 3,
+                borderRadius: '50%',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  borderRadius: '50%',
+                  background: (theme) => `radial-gradient(circle, transparent 50%, ${theme.palette.background.default} 100%)`,
+                  pointerEvents: 'none',
+                },
               }}
-            />
+            >
+              <Avatar
+                src={profileImage}
+                alt={personalInfo.name}
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </Box>
           </Box>
         </Box>
       </Container>
