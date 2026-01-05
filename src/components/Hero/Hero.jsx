@@ -1,8 +1,9 @@
 import { Box, Container, Typography, Button, Avatar, IconButton, Stack } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { Link } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 import { personalInfo } from '../../data/personalInfo';
+import profileImage from '../../assets/profile.png';
 
 const Hero = () => {
   return (
@@ -83,32 +84,38 @@ const Hero = () => {
               spacing={2}
               sx={{ mb: 4, justifyContent: { xs: 'center', md: 'flex-start' } }}
             >
-              <Button
-                component={Link}
+              <ScrollLink
                 to="projects"
                 spy={true}
                 smooth={true}
                 offset={-70}
                 duration={500}
-                variant="contained"
-                size="large"
-                sx={{ px: 4, py: 1.5 }}
+                style={{ cursor: 'pointer' }}
               >
-                View Projects
-              </Button>
-              <Button
-                component={Link}
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ px: 4, py: 1.5 }}
+                >
+                  View Projects
+                </Button>
+              </ScrollLink>
+              <ScrollLink
                 to="contact"
                 spy={true}
                 smooth={true}
                 offset={-70}
                 duration={500}
-                variant="outlined"
-                size="large"
-                sx={{ px: 4, py: 1.5 }}
+                style={{ cursor: 'pointer' }}
               >
-                Contact Me
-              </Button>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  sx={{ px: 4, py: 1.5 }}
+                >
+                  Contact Me
+                </Button>
+              </ScrollLink>
             </Stack>
 
             <Stack
@@ -158,17 +165,14 @@ const Hero = () => {
             }}
           >
             <Avatar
+              src={profileImage}
+              alt={personalInfo.name}
               sx={{
                 width: { xs: 200, sm: 250, md: 300 },
                 height: { xs: 200, sm: 250, md: 300 },
-                bgcolor: 'primary.main',
-                fontSize: { xs: '4rem', sm: '5rem', md: '6rem' },
-                fontWeight: 700,
                 boxShadow: 3,
               }}
-            >
-              WC
-            </Avatar>
+            />
           </Box>
         </Box>
       </Container>
