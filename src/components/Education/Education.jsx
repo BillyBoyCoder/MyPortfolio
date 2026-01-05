@@ -19,7 +19,7 @@ const Education = () => {
           subtitle="My formal education and continuous learning"
         />
 
-        {education.map((item) => (
+        {education.map((item, index) => (
           <Paper
             key={item.id}
             elevation={0}
@@ -31,6 +31,7 @@ const Education = () => {
               borderRadius: 2,
               border: 1,
               borderColor: 'divider',
+              mb: index < education.length - 1 ? '5px' : 0,
             }}
           >
             <Box
