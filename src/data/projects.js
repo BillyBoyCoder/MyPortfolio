@@ -31,7 +31,9 @@ I knew that FogBugz had an API I could integrate with. I also knew that Google S
     impact: "Reduced issue identification time from potentially hours to seconds. Currently in active production use.",
     techStack: ["React", "WLanguage", "SQL Server", "REST API"],
     role: "Sole Developer",
-    challenges: "Designing a real-time monitoring system that aggregates data from multiple customer environments.",
+    challenges: `The challenge was I needed to work with technology that I had not yet been exposed to. While I had already done work with ASP back in 1998 and 2000, I had never worked with React or Node.js. I had done a little bit of casual JavaScript programming but nothing in depth.
+
+I took the knowledge I had with HTML and CSS, and the knowledge I had of JavaScript and jumped in with both feet. I got myself familiarized with React and Bootstrap, and increased my understanding of JavaScript and Node.js. I didn't need ExpressJS for this application as our backend was handled with SQL Server and WLanguage. I managed to learn enough to build a web-based dashboard that is still in use today. It provides real-time analytical data for support to be able to preemptively act on issues that are coming up for our customers and gives them the opportunity to fix the issues before the customers notice them or it significantly affects the customers.`,
     liveUrl: null,
     githubUrl: null,
     images: [],
