@@ -4,15 +4,15 @@ export const projects = [
     title: "Automated QA Case Generation System",
     category: "professional",
     shortDescription: "AWS Lambda-powered automation reducing case creation from hours to minutes",
-    fullDescription: `Quality Assurance analysts spent several hours manually creating ~800 FogBugz
-      cases for software updates, managing data across Google Sheets and the FogBugz web interface.
-      Developed an AWS Lambda-powered automation system triggered via a custom web interface. The
-      solution integrated Google Sheets API and FogBugz API to automatically read spreadsheet entries,
-      determine customer hosting status, create appropriate cases, and assign them to the correct personnel.`,
+    fullDescription: `The problem we had to solve: We were using a Google spreadsheet to keep track of more than 600 upgrades for a point-of-sale software. Each upgrade required a FogBugz case to be created so that staff could keep track of what they did during the upgrade process for the Point of Sale software to our customer. Our current technology stack did not allow me to integrate with the Google Spreadsheet. This is what I had to solve. The staff who requested this process to be automated also requested, if possible, that we could automate the process of generating the FogBugz cases. The process was currently taking the staff member several hours to update his spreadsheet and create all the cases.`,
     impact: "Reduced case creation time from several hours to under 5 minutes",
     techStack: ["React", "Node.js", "AWS Lambda", "Google Sheets API", "FogBugz API", "SQL Server", "Bootstrap"],
     role: "Sole Developer",
-    challenges: "Discovered existing tech stack couldn't update Google Sheets directly. Researched Google APIs and implemented AWS Lambda solution to bridge the gap.",
+    challenges: `The solution: I spent many hours after work, late into the night, working on this and thought nothing of it because this was a challenging task and forced me into territory I had not been. It was exciting.
+
+Our current technology stack did not allow me to integrate with Google Spreadsheets as we were using a language called WLanguage, which is an OOP language created by PC Soft.
+
+I knew that FogBugz had an API I could integrate with. I also knew that Google Spreadsheets must have an API. I began the research. Familiarized myself with the Google API and how I could get access to the Google Spreadsheet. Now, how do I build the FogBugz cases and modify the spreadsheet? I knew I could create a Lambda function on AWS, although I had never done this before. I also knew that these functions could be executed by a URL. There was another critical need for our company that I was going to be working on in the future - a web-based dashboard for support. So I thought, "What a clever place to put the functionality to execute the Lambda function on AWS!" And that is exactly what I did. I wrote a Lambda function that would scrape information entered by our staff member from the Google spreadsheet, access the FogBugz API, create the FogBugz cases, go back and update the spreadsheet. This allowed the user to create one or create 500 cases, all at the click of a button. Reducing hours of work down to minutes.`,
     liveUrl: null,
     githubUrl: null,
     images: [],
