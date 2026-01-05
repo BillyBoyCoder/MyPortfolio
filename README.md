@@ -1,16 +1,102 @@
-# React + Vite
+# William Cook - Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional portfolio website for William Cook, a Full Stack Software Engineer with 10+ years of experience specializing in the MERN stack.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework:** React 18 with Vite
+- **UI Library:** Material UI (MUI)
+- **Styling:** Emotion (CSS-in-JS)
+- **State:** React Context API (theme management)
+- **Form Service:** EmailJS (contact form)
+- **Smooth Scroll:** react-scroll
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Responsive single-page design
+- Dark/light theme toggle with localStorage persistence
+- Smooth scroll navigation
+- Interactive project showcase with modal details
+- Contact form with validation
+- Mobile-friendly hamburger menu
+- SEO optimized with Open Graph tags
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone git@github.com:BillyBoyCoder/MyPortfolio.git
+cd MyPortfolio
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Build for Production
+
+```bash
+npm run build
+npm run preview  # Preview the build locally
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Hero/          # Landing section
+│   ├── About/         # About me section
+│   ├── Skills/        # Skills showcase
+│   ├── Projects/      # Project cards & modal
+│   ├── Experience/    # Work timeline
+│   ├── Education/     # Education info
+│   ├── Testimonials/  # Placeholder
+│   ├── Contact/       # Contact form
+│   └── common/        # Shared components
+├── context/           # React Context (theme)
+├── data/              # Portfolio content
+├── theme/             # MUI theme config
+└── assets/            # Images & icons
+```
+
+## Configuration
+
+### EmailJS Setup
+
+To enable the contact form, update the credentials in `src/components/Contact/ContactForm.jsx`:
+
+```javascript
+const SERVICE_ID = 'your_service_id';
+const TEMPLATE_ID = 'your_template_id';
+const PUBLIC_KEY = 'your_public_key';
+```
+
+### Adding Your Resume
+
+Place your resume PDF in the `public/` folder as `resume.pdf`.
+
+## Deployment
+
+This project is configured for deployment on Vercel:
+
+1. Connect your GitHub repository to Vercel
+2. Vercel will auto-detect Vite and configure the build
+3. Set any environment variables if needed
+
+## License
+
+This project is for personal use.
+
+---
+
+Built with React + Vite + Material UI
