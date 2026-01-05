@@ -45,14 +45,15 @@ Before writing ANY code, you MUST read and internalize these reference documents
 | UI Library | Material UI (MUI) | Touch-friendly, responsive components |
 | State | React Context API | For theme (dark/light) toggle |
 | Styling | MUI + Emotion | CSS-in-JS approach |
-| Form Service | EmailJS or Formspree | No backend needed |
+| Contact Form | **EmailJS** | Account created - 200 emails/month free |
 | Hosting | Vercel | Auto-deploy from GitHub |
 
 **Do NOT use:**
 - Redux (overkill for this project)
 - React Router (single-page scrolling site)
-- Any backend/Express.js (use serverless form service)
+- Any backend/Express.js (EmailJS handles contact form)
 - Tailwind CSS (use MUI instead)
+- Formspree (using EmailJS instead)
 
 ---
 
@@ -297,23 +298,82 @@ Requirements:
 Requirements:
 - Contact form with fields: Name, Email, Message
 - Form validation (required fields, email format)
-- Integration with EmailJS or Formspree
+- Integration with EmailJS (account already created - 200 emails/month free)
 - Loading state during submission
 - Success/error feedback messages
 - Alternative contact methods (email link, LinkedIn)
 - Resume download button
 
-**EmailJS Integration:**
-```javascript
-import emailjs from '@emailjs/browser';
+**EmailJS Integration (CONFIRMED):**
 
-// User will need to add their own keys
-const SERVICE_ID = 'YOUR_SERVICE_ID';
-const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+The user has created an EmailJS account. They need to complete setup in the EmailJS dashboard:
+1. Add Gmail service (Email Services → Add New Service → Gmail)
+2. Create email template (Email Templates → Create New Template)
+3. Get Public Key (Account → Public Key)
+
+**Environment Variables (.env):**
+```env
+VITE_EMAILJS_SERVICE_ID=service_xxxxxxx
+VITE_EMAILJS_TEMPLATE_ID=template_xxxxxxx  
+VITE_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxxx
 ```
 
-**Commit**: `feat: implement Contact section with form`
+**Install package:**
+```bash
+npm install @emailjs/browser
+```
+
+**Implementation:**
+```javascript
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+
+const ContactForm = () => {
+  const form = useRef();
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      form.current,
+      { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
+    )
+    .then(() => {
+      setStatus({ type: 'success', message: 'Message sent successfully!' });
+      form.current.reset();
+    })
+    .catch((error) => {
+      setStatus({ type: 'error', message: 'Failed to send. Please try again.' });
+      console.error('EmailJS Error:', error);
+    })
+    .finally(() => setLoading(false));
+  };
+
+  return (
+    <form ref={form} onSubmit={handleSubmit}>
+      <TextField name="from_name" label="Your Name" required fullWidth />
+      <TextField name="from_email" label="Your Email" type="email" required fullWidth />
+      <TextField name="message" label="Message" multiline rows={4} required fullWidth />
+      {status.message && <Alert severity={status.type}>{status.message}</Alert>}
+      <Button type="submit" disabled={loading}>
+        {loading ? <CircularProgress size={24} /> : 'Send Message'}
+      </Button>
+    </form>
+  );
+};
+```
+
+**Form field names MUST match template variables:**
+- `from_name` → `{{from_name}}`
+- `from_email` → `{{from_email}}`
+- `message` → `{{message}}`
+
+**Commit**: `feat: implement Contact section with EmailJS integration`
 
 ### Phase 13: App Assembly & Navigation
 

@@ -9,10 +9,10 @@ import {
 import SendIcon from '@mui/icons-material/Send';
 import emailjs from '@emailjs/browser';
 
-// EmailJS credentials - user needs to set these up
-const SERVICE_ID = 'YOUR_SERVICE_ID';
-const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+// EmailJS credentials
+const SERVICE_ID = 'service_waa98xo';
+const TEMPLATE_ID = 'template_nodmke8';
+const PUBLIC_KEY = 'NYaxm45rN1Rr85QJp';
 
 const ContactForm = () => {
   const formRef = useRef();

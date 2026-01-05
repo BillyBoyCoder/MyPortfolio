@@ -1,8 +1,9 @@
 # William Cook Portfolio - Technical Specification
 
-> **Version:** 1.1  
+> **Version:** 1.2  
 > **Last Updated:** January 5, 2026  
-> **Status:** Brainstorming Complete - Ready for Development
+> **Status:** Brainstorming Complete - Ready for Development  
+> **Contact Form:** EmailJS Integration Confirmed
 
 ---
 
@@ -461,36 +462,163 @@ export const darkTheme = createTheme({
 
 ---
 
-## Contact Form Integration
+## Contact Form Integration - EmailJS
 
-### EmailJS Setup (Recommended)
+### Account Information
+- **Provider:** EmailJS (https://dashboard.emailjs.com)
+- **Account Status:** ✅ Created
+- **Free Tier:** 200 emails/month
+- **Package:** `@emailjs/browser`
+
+### EmailJS Setup Steps (Complete These in Dashboard)
+
+#### Step 1: Add Email Service
+1. Go to **Email Services** in sidebar
+2. Click **"Add New Service"**
+3. Select **Gmail** (or your preferred provider)
+4. Connect your Gmail account (bcookemail@gmail.com)
+5. **Save the Service ID** (e.g., `service_xxxxxxx`)
+
+#### Step 2: Create Email Template
+1. Go to **Email Templates** in sidebar
+2. Click **"Create New Template"**
+3. Configure template with these variables:
+   - `{{from_name}}` - Sender's name
+   - `{{from_email}}` - Sender's email  
+   - `{{message}}` - Message content
+   - `{{to_name}}` - Your name (William Cook)
+4. **Save the Template ID** (e.g., `template_xxxxxxx`)
+
+**Recommended Template:**
+```
+Subject: Portfolio Contact from {{from_name}}
+
+Hello William,
+
+You received a new message from your portfolio website:
+
+From: {{from_name}}
+Email: {{from_email}}
+
+Message:
+{{message}}
+
+---
+Sent from your portfolio contact form
+```
+
+#### Step 3: Get Public Key
+1. Go to **Account** in sidebar
+2. Find your **Public Key** (e.g., `xxxxxxxxxxxxxxxxx`)
+
+### Environment Variables (.env)
+
+```env
+VITE_EMAILJS_SERVICE_ID=service_xxxxxxx
+VITE_EMAILJS_TEMPLATE_ID=template_xxxxxxx
+VITE_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxxx
+```
+
+**⚠️ IMPORTANT:** Add `.env` to `.gitignore` to keep keys private!
+
+### React Implementation
 
 ```javascript
 // src/components/Contact/ContactForm.jsx
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { Button, TextField, Alert, CircularProgress } from '@mui/material';
 
-const sendEmail = (e) => {
-  e.preventDefault();
-  
-  emailjs.sendForm(
-    'YOUR_SERVICE_ID',
-    'YOUR_TEMPLATE_ID',
-    e.target,
-    'YOUR_PUBLIC_KEY'
-  )
-  .then((result) => {
-    console.log('SUCCESS!', result.text);
-  })
-  .catch((error) => {
-    console.log('FAILED...', error.text);
-  });
+const ContactForm = () => {
+  const form = useRef();
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus({ type: '', message: '' });
+
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      form.current,
+      { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
+    )
+    .then(() => {
+      setStatus({ type: 'success', message: 'Message sent successfully! I\'ll get back to you soon.' });
+      form.current.reset();
+    })
+    .catch((error) => {
+      setStatus({ type: 'error', message: 'Failed to send message. Please try again or email me directly.' });
+      console.error('EmailJS Error:', error);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+  };
+
+  return (
+    <form ref={form} onSubmit={handleSubmit}>
+      <TextField
+        name="from_name"
+        label="Your Name"
+        required
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        name="from_email"
+        label="Your Email"
+        type="email"
+        required
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        name="message"
+        label="Message"
+        multiline
+        rows={4}
+        required
+        fullWidth
+        margin="normal"
+      />
+      
+      {status.message && (
+        <Alert severity={status.type} sx={{ mt: 2 }}>
+          {status.message}
+        </Alert>
+      )}
+      
+      <Button
+        type="submit"
+        variant="contained"
+        size="large"
+        disabled={loading}
+        sx={{ mt: 2 }}
+      >
+        {loading ? <CircularProgress size={24} /> : 'Send Message'}
+      </Button>
+    </form>
+  );
 };
+
+export default ContactForm;
 ```
 
 ### Form Fields
-- Name (required)
-- Email (required)
-- Message (required)
+| Field | Name Attribute | Required | Type |
+|-------|---------------|----------|------|
+| Name | `from_name` | Yes | text |
+| Email | `from_email` | Yes | email |
+| Message | `message` | Yes | textarea |
+
+### Vercel Environment Variables
+When deploying to Vercel, add these environment variables in Project Settings:
+- `VITE_EMAILJS_SERVICE_ID`
+- `VITE_EMAILJS_TEMPLATE_ID`
+- `VITE_EMAILJS_PUBLIC_KEY`
 
 ---
 
