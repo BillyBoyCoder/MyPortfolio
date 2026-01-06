@@ -121,7 +121,7 @@ const Contact = () => {
                 <Button
                   variant="outlined"
                   startIcon={<DescriptionIcon />}
-                  href="/resume.pdf"
+                  href="/William_Cook_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   size="large"

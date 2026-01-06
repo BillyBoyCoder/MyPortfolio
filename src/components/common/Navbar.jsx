@@ -68,7 +68,7 @@ const Navbar = () => {
         <ListItem disablePadding>
           <ListItemButton
             component="a"
-            href="/resume.pdf"
+            href="/William_Cook_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             sx={{ textAlign: 'center' }}
@@ -135,7 +135,7 @@ const Navbar = () => {
             <Button
               variant="outlined"
               color="primary"
-              href="/resume.pdf"
+              href="/William_Cook_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               size="small"
