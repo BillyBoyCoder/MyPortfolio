@@ -1,6 +1,6 @@
 import { Box, Typography, Paper } from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 const Timeline = ({ items }) => {
   return (
@@ -18,7 +18,7 @@ const Timeline = ({ items }) => {
           {/* Timeline line and dot */}
           <Box
             sx={{
-              display: 'flex',
+              display: { xs: 'none', sm: 'flex' },
               flexDirection: 'column',
               alignItems: 'center',
               minWidth: 40,
@@ -73,13 +73,94 @@ const Timeline = ({ items }) => {
             <Typography variant="h6" sx={{ fontWeight: 600, mt: 0.5 }}>
               {item.title}
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
               {item.company}
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              {item.description}
-            </Typography>
-            {item.achievements && (
+
+            {/* Responsibilities */}
+            {item.responsibilities && (
+              <Box sx={{ mb: 3 }}>
+                <Box component="ul" sx={{ pl: 0, m: 0, listStyle: 'none' }}>
+                  {item.responsibilities.map((responsibility, i) => (
+                    <Box
+                      component="li"
+                      key={i}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: 1.5,
+                        mb: 1.5,
+                      }}
+                    >
+                      <FiberManualRecordIcon
+                        sx={{ color: 'primary.main', fontSize: 8, mt: 1 }}
+                      />
+                      <Typography variant="body2" color="text.secondary">
+                        {responsibility}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+            )}
+
+            {/* Key Projects */}
+            {item.keyProjects && item.keyProjects.length > 0 && (
+              <Box sx={{ mt: 3 }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 2 }}>
+                  Key Projects
+                </Typography>
+                {item.keyProjects.map((project, i) => (
+                  <Paper
+                    key={i}
+                    elevation={0}
+                    sx={{
+                      p: 2.5,
+                      mb: 2,
+                      bgcolor: 'background.default',
+                      borderRadius: 1,
+                      border: 1,
+                      borderColor: 'divider',
+                      '&:last-child': { mb: 0 },
+                    }}
+                  >
+                    <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1.5 }}>
+                      {project.name}
+                    </Typography>
+
+                    <Box sx={{ mb: 1.5 }}>
+                      <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                        Challenge:
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {project.challenge}
+                      </Typography>
+                    </Box>
+
+                    <Box sx={{ mb: 1.5 }}>
+                      <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                        Solution:
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {project.solution}
+                      </Typography>
+                    </Box>
+
+                    <Box>
+                      <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                        Impact:
+                      </Typography>
+                      <Typography variant="body2" color="primary.main" sx={{ fontWeight: 500 }}>
+                        {project.impact}
+                      </Typography>
+                    </Box>
+                  </Paper>
+                ))}
+              </Box>
+            )}
+
+            {/* Legacy achievements support */}
+            {item.achievements && !item.responsibilities && (
               <Box component="ul" sx={{ pl: 0, m: 0, listStyle: 'none' }}>
                 {item.achievements.map((achievement, i) => (
                   <Box
@@ -92,8 +173,8 @@ const Timeline = ({ items }) => {
                       mb: 1,
                     }}
                   >
-                    <CheckCircleIcon
-                      sx={{ color: 'primary.main', fontSize: 18, mt: 0.3 }}
+                    <FiberManualRecordIcon
+                      sx={{ color: 'primary.main', fontSize: 8, mt: 1 }}
                     />
                     <Typography variant="body2" color="text.secondary">
                       {achievement}
